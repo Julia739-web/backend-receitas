@@ -1,0 +1,13 @@
+###
+GET http://localhost:3000/usuarios
+
+###
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+    "nome": "Joao do Star Wars",
+    "senha": "123",
+    "email": "marcos@gmail.com",
+    "telefone": "(48) 9 9999-9999"
+}
