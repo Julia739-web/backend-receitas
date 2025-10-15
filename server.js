@@ -28,13 +28,72 @@ server.post('/usuarios', async (req, reply) => {
             'INSERT INTO usuarios (nome, senha, email, telefone) VALUES ($1, $2, $3, $4) RETURNING *',
             [nome, senha, email, telefone]
         );
-        reply.status(201).send(retorno.rows[0]);
-    } catch (error) {
-        reply.status(500).send({ error: 'Erro criando o usuário' })
+        reply.status(200).send(retorno.rows[0]);
+    } catch (e) {
+        reply.status(500).send({ error: e.message })
 }
 })
+
+server.get('/categorias', async (req, reply) => {
+    try {
+        const resultado = await pool.query('SELECT * FROM categorias')
+        reply.status(200).send(resultado.rows)
+    } catch (err) {
+        reply.status(500).send({ error: err.message })
+    }
+})
+
+server.post('/categorias', async (req, reply) => {
+    const { nome } = req.body;
+
+    try {
+        const resultado = await pool.query(
+            'INSERT INTO CATEGORIAS (nome) VALUES ($1) RETURNING *',
+            [nome]
+        )
+        reply.status(200).send(resultado.rows[0])
+    } catch (e) {
+        reply.status(500).send({ error: e.message })
+    }
+})
+
+
 
 server.listen({
     port: 3000,
     host: '0.0.0.0'
+})
+
+//categorias
+server.get('/categorias', async (req, reply) => {
+    try {
+        const resultado = await pool.query('SELECT * FROM categorias')
+        reply.status(200).send(resultado.rows)
+    } catch (err) {
+        reply.status(500).send({ error: err.message })
+    }
+})
+
+server.post('/categorias', async (req, reply) => {
+    const { nome } = req.body;
+
+    try {
+        const resultado = await pool.query(
+            'INSERT INTO CATEGORIAS (nome) VALUES ($1) RETURNING *',
+            [nome]
+        )
+        reply.status(200).send(resultado.rows[0])
+    } catch (e) {
+        reply.status(500).send({ error: e.message })
+    }
+})
+
+server.delete('/usuarios', async(req, reply) =>{
+    const id = req.params.id
+    try{
+        await pool.query('DELETE FROM USUARIOS WHERE id=$1', [id])
+
+    } catch (err) {
+
+    }
 })
