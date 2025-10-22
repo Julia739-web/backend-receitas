@@ -41,3 +41,43 @@ Content-Type: application/application/json
     "telefone": "(4883926-7389)"
 
 }
+
+
+###
+
+GET http://localhost:3000/receitas?page=1&limit=10
+
+
+###
+
+GET http://localhost:3000/receitas?page=2&limit=5
+
+
+###
+POST http://localhost:3000/receitas
+Content-Type: application/json
+
+{
+    "nome": "Bolo de Cenoura",
+    "modo_preparo": "corta cenoura, mistura com trigo, leva ao forno",
+    "ingredientes": "cenoura, trigo e ovo",
+    "usuario_id": 3,
+    "categoria_id": 3,
+    "porcoes": 12,
+    "tempo_preparo_minutos": 45
+}
+
+
+###
+POST http://localhost:3000/receitas
+Content-Type: application/json
+
+{
+    "nome": "Bolo de Chocolate",
+    "modo_preparo": "pega nescau, mistura com trigo, leva ao forno",
+    "ingredientes": "nescau, trigo e ovo",
+    "usuario_id": 3,
+    "categoria_id": 3,
+    "porcoes": 10,
+    "tempo_preparo_minutos": 30
+}
